@@ -18,19 +18,25 @@ public class UserController {
 
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
-    public RegisterResponseDto signup(@Valid @RequestBody RegisterDto registerDto){
+    public CommonResponseDto signup(@Valid @RequestBody RegisterDto registerDto){
         return userService.register(registerDto);
     }
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public LoginResponseDto login(@Valid @RequestBody LoginDto loginDto){
+    public CommonResponseDto login(@Valid @RequestBody LoginDto loginDto){
         return userService.login(loginDto);
     }
 
     @PostMapping("/verify")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void verify(@Valid @RequestBody VerifyDto verifyDto){
-        userService.verify(verifyDto);
+    public CommonResponseDto verify(@Valid @RequestBody VerifyDto verifyDto){
+        return userService.verify(verifyDto);
+    }
+
+    @PostMapping("re_otp")
+    @ResponseStatus(HttpStatus.OK)
+    public CommonResponseDto reOtp(@Valid @RequestBody VerifyDto verifyDto) {
+        return userService.reOtp(verifyDto);
     }
 }
